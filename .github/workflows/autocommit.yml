@@ -27,8 +27,9 @@ jobs:
       - name: Create 30 empty commits
         run:
           start_date = "2024-06-30"
-          for i in $(seq 0 1800);do
+          for i in $(seq 0 30);do
             current_date = $(date -d "$start_date +$i days" + "%Y-%m-%dT12:00:00")
+            echo $current_date > LAST_UPDATED
             GIT_COMMITTER_DATE="$current_date"   git commit --allow-empty -m "a commit a day keeps your girlfriend away" --date "$current_date"
           done
       - name: Commit changes
